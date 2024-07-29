@@ -1,0 +1,105 @@
+@import "../../../scss/abstract/mixins";
+
+$primary-color: #3498db;
+$secondary-color: #bd10e0;
+$text-color: #333;
+
+.modal-main {
+    @include flex($fd: column);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+
+    & .modal {
+       background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 8px 32px 0 rgba(92, 84, 112, 0.37);
+  position: relative;
+
+ & h2.title {
+    color: #333; 
+    font-size: 1.5rem;
+    font-weight: bold; 
+    margin-bottom: 1rem; 
+  }
+    
+ & .input-group {
+    margin-bottom: 20px;
+  
+   & label {
+      display: block;
+      margin-bottom: 8px;
+      color: $text-color;
+      font-weight: bold;
+    }
+  
+   & input,
+    select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid $primary-color;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+  }
+  
+  .quill {
+    margin-bottom: 20px;
+    & button {
+      background-color: #fff;
+      height: 2rem;
+      &:hover{
+        background-color: #3498db;
+      }
+    }
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: $primary-color;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  
+    &:hover {
+      background-color: $secondary-color;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .modal {
+      padding: 10px;
+      max-width: 90%;
+    }
+  
+    .input-group label {
+      font-size: 0.9rem;
+    }
+  
+    input,
+    select {
+      font-size: 0.9rem;
+    }
+  
+    button {
+      font-size: 0.9rem;
+      padding: 8px 16px;
+    }
+  }
+    }
+}
+
+
+

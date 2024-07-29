@@ -1,0 +1,66 @@
+@import "../../../scss/abstract/_mixins.scss";
+
+$primary-color: #3498db;
+$text-color: #333;
+$background-color: #f4f4f4;
+$card-background-color: #fff;
+$card-border-color: #ddd;
+$container-padding: 20px;
+
+.home-main {
+  display: flex;
+  justify-content: center;
+  padding: $container-padding;
+  background-color: $background-color;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  max-width: 1200px;
+  width: 100%;
+  justify-content: center;
+}
+
+.blog-card {
+  background-color: $card-background-color;
+  border: 1px solid $card-border-color;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  overflow: hidden;
+  flex: 0 1 calc(33.333% - 20px); // For three columns layout
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  h4 {
+    margin: 0;
+    padding: 10px;
+    color: $primary-color;
+    font-size: 1.2em;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-bottom: 1px solid $card-border-color;
+  }
+}
+
+@media (max-width: 768px) {
+  .blog-card {
+    flex: 0 1 calc(50% - 20px); // For two columns layout on smaller screens
+  }
+}
+
+@media (max-width: 480px) {
+  .blog-card {
+    flex: 0 1 100%; // For single column layout on mobile screens
+  }
+}

@@ -1,0 +1,92 @@
+@import "../../../scss/abstract/mixins";
+
+$primary-color: #3498db;
+$text-color: #333;
+$error-color: #e74c3c;
+$background-color: #f4f4f4;
+$form-background-color: #fff;
+$form-border-color: #ddd;
+$container-padding: 20px;
+
+.login-form {
+  @include flex();
+  height: 100vh;
+  background-color: $background-color;
+}
+
+.input-group {
+  margin-bottom: 15px;
+  position: relative;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid $form-border-color;
+  border-radius: 5px;
+  font-size: 1em;
+  transition: border-color 0.3s ease;
+
+  &:focus {
+    border-color: $primary-color;
+    outline: none;
+  }
+
+  &:focus + .user-label,
+  &:not(:placeholder-shown) + .user-label {
+    top: -10px;
+    left: 10px;
+    font-size: 0.75em;
+    color: $primary-color;
+    background-color: $form-background-color;
+    padding: 0 5px;
+  }
+}
+
+.user-label {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  font-size: 1em;
+  color: $text-color;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.error {
+  color: $error-color;
+  font-size: 0.875em;
+  margin-top: 5px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: $primary-color;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
+
+  &:disabled {
+    background-color: lighten($primary-color, 20%);
+    cursor: not-allowed;
+  }
+}
+
+form {
+  background-color: $form-background-color;
+  border: 1px solid $form-border-color;
+  border-radius: 10px;
+  padding: $container-padding;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+}

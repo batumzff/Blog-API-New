@@ -1,0 +1,17 @@
+@import "../scss/abstract/mixins";
+
+ body, html {
+     margin: 0;
+     padding: 0;
+      height: 100%;
+     font-family: Arial, sans-serif;
+      /* @include flex($fd: column, $jc: space-between);
+      min-height: 100dvh; */
+   }
+   #root {
+    @include flex($fd: column, $jc: space-between);
+     min-height: 100dvh;
+   }
+   main {
+     flex: 1;
+   }

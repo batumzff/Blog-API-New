@@ -1,0 +1,33 @@
+@mixin flex($fd:row,$jc:center,$ai:center,$g:1rem){
+    display: flex;
+    flex-direction: $fd;
+    justify-content: $jc;
+    align-items: $ai;
+    gap:$g; 
+}
+
+@mixin grid($gtr:auto, $gtc:repeat(4, 1fr),$g:.5rem){
+    display: grid;
+    grid-template-rows: $gtr;
+    grid-template-columns: $gtc;
+    gap: $g;
+  }
+  
+  @mixin responsive-grid(
+    $small-gtr: auto, $small-gtc: repeat(1, 1fr), $small-g: 1rem,
+    $medium-gtr: auto, $medium-gtc: repeat(3, 1fr), $medium-g: 1.5rem,
+    $large-gtr: auto, $large-gtc: repeat(4, 1fr), $large-g: 2rem
+  ) {
+      // Small screens
+      @include grid($small-gtr, $small-gtc, $small-g);
+  
+      // Medium screens
+      @media (min-width: 600px) {
+          @include grid($medium-gtr, $medium-gtc, $medium-g);
+      }
+  
+      // Large screens
+      @media (min-width: 1024px) {
+          @include grid($large-gtr, $large-gtc, $large-g);
+      }
+  } 

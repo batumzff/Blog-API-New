@@ -1,0 +1,75 @@
+@import "../../../scss/abstract/mixins";
+
+$primary-color: #3498db;
+$secondary-color: #bd10e0;
+$text-color: #333;
+$background-color: rgba(238, 232, 232, 0.949);
+$box-shadow-color: rgba(92, 84, 112, 0.37);
+$blur-value: 2.5px;
+$padding: 0.5rem;
+$border-radius: 10px;
+
+.container {
+  position: absolute;
+  top: 80px;
+  right: 5px;
+  padding: $padding;
+  background: $background-color;
+  box-shadow: 0 8px 32px 0 $box-shadow-color;
+  backdrop-filter: blur($blur-value);
+  -webkit-backdrop-filter: blur($blur-value);
+  border-radius: $border-radius;
+  z-index: 10;
+  transition: transform 0.3s ease-in-out;
+
+  // &.active {
+  //   transform: translateX(0);
+  // }
+
+  & main {
+    @include flex($fd: column);
+  }
+
+  & .navigation {
+    @include flex($fd: column);
+
+    & .logout {
+      text-decoration: none;
+      color: $text-color;
+      font-size: 1rem;
+      padding: 0.5rem 0;
+      transition: color 0.3s ease;
+
+      &:hover{
+        cursor: pointer;
+        color: $primary-color;
+      }
+    }
+    & div {
+      margin: 0 1rem 1rem;
+      @include flex($fd: column);
+
+      & a {
+        text-decoration: none;
+        color: $text-color;
+        font-size: 1rem;
+        padding: 0.5rem 0;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: $primary-color;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+    top: 60px;
+    height: calc(100% - 60px);
+    transform: translateX(41%);
+  }
+}
+

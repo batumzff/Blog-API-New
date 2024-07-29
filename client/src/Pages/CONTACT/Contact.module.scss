@@ -1,0 +1,45 @@
+.contact-container {
+  min-height: 100dvh;
+    h3 {
+      color: #333;
+      span {
+        color: #007bff;
+      }
+    }
+  
+    .contact-info {
+      margin-top: 20px;
+      a {
+        color: #333;
+        text-decoration: none;
+        display: block;
+        margin-bottom: 10px;
+        svg {
+          margin-right: 10px;
+        }
+      }
+    }
+  
+    .contact-footer {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+  
+      .icons {
+        display: flex;
+        a {
+          text-decoration: none;
+          .whatsapp,
+          .facebook,
+          .instagram,
+          .telegram,
+          div {
+            font-size: 24px;
+            margin-right: 10px;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+  
