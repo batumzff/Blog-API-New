@@ -46,7 +46,7 @@ const BlogDetails = () => {
     getDetailPage("blogDetail", blogId);
     getLike("blogs", blogId);
     getComment("blogDetail", blogId);
-  }, [likeStatus,editComment,commentModal]);
+  }, [likeStatus, editComment, commentModal]);
   // console.log(blogId);
   const postLike = async () => {
     try {
@@ -88,14 +88,17 @@ const BlogDetails = () => {
     setEditCommentID(id);
   };
 
-  const handleCommentDelete = async (commentId) => {
-    console.log(commentId);
-    console.log(blogId);
-    // deleteComment(commentId, blogId);
-    const data = await axiosWithToken.delete(`comments/${commentId}`)
-    console.log(data)
-    // const info = await axiosWithToken("comments")
-    // console.log(info)
+
+  const handleCommentDelete =  (commentId) => {
+
+    try {
+      console.log("delete run")
+      deleteComment(commentId, blogId);
+    } catch (error) {
+      console.log(error)
+    }
+    console.log(commentId)
+     
   };
   console.log(editCommentID);
   console.log(editComment);

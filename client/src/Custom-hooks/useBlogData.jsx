@@ -18,7 +18,7 @@ const useBlogData = () => {
       const [users, categories, blogs, comments] = await Promise.all([
         axiosWithToken("users?limit=20"),
         axiosWithToken("categories"),
-        axiosWithToken("blogs?limit=20"),
+        axiosWithToken("blogs?limit=20&sort[createdAt]=desc"),
         // axiosWithToken("comments"),
       ]);
 
@@ -39,7 +39,7 @@ const useBlogData = () => {
   const getData = async (url = "blogs") => {
     dispatch(fetchStart());
     try {
-      const { data } = await axiosWithToken(`${url}?limit=20`);
+      const { data } = await axiosWithToken(`${url}?limit=20&sort[createdAt]=desc`);
       dispatch(getSingleData({ data, url }));
     } catch (error) {
       dispatch(fetchFail());
@@ -125,9 +125,9 @@ const useBlogData = () => {
   console.log(blogId);
   dispatch(fetchStart());
   try {
-    const {data} = await axiosWithToken.delete(`comments/${commentId}`)
+    const {data} = await axiosWithToken.delete(`comments/${commentId}`,blogId)
     console.log(data);
-   await getComment("blogDetail",blogId)
+    getComment("blogDetail",blogId)
   } catch (error) {
     dispatch(fetchFail());
     console.log(error);
