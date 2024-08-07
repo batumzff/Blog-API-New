@@ -65,7 +65,8 @@ module.exports = {
     const data = await Comment.findOne({
       _id: req.params.commentId,
       isDeleted: false,
-    }).populate(["userId", "blogId"]);
+      // }).populate(["userId", "blogId"]);
+    });
 
     res.status(202).send({
       error: false,
@@ -93,16 +94,23 @@ module.exports = {
       req.body,
       { runValidators: true }
     );
-
+    // const commentsOfBlog = await Comment.find({ post });
+    const comment = await Comment.find({blogId:req.body.blogId });
+    console.log("burasiiiiiiiiiiiiiiiiii",comment);
+    
+    const deneme = await Blog.updateOne({ _id: req.body.blogId },{comments:comment } );
     // console.log("comment data",data);
-    const updatedData = await Comment.findOne({ _id: req.params.commentId, isDeleted: false })
+    // const updatedData = await Comment.findOne({ _id: req.params.commentId, isDeleted: false })
 
-    console.log("****************************************comment updated data****************************", updatedData);
+    console.log("****************************************deneme****************************", deneme);
 
     res.status(202).send({
       error: false,
       data,
-      updatedData: await Comment.findOne({ _id: req.params.commentId, isDeleted: false }),
+      updatedData: await Comment.findOne({
+        _id: req.params.commentId,
+        isDeleted: false,
+      }),
     });
   },
 
@@ -113,9 +121,10 @@ module.exports = {
         */
     const user = req?.user;
     const comment = await Comment.findOne({ _id: req.params.commentId });
+
     // console.log(comment.userId.toString());
-    // console.log("user",user._id);
-    // console.log("user", user);
+    // console.log("user", user._id);
+    // console.log("user", user.isAdmin);
     if (!comment) {
       return res.status(404).send({
         error: true,
@@ -123,10 +132,11 @@ module.exports = {
       });
     }
     const customFilter =
-      !(user.isAdmin || user.isStaff) &&
-      (user?._id).toString() != comment?.userId?.toString()
-        ? { }
-        : { isDeleted: true };
+      user.isAdmin ||
+      user.isStaff ||
+      (user?._id).toString() == comment?.userId?.toString()
+        ? { isDeleted: true }
+        : {};
     // const data = await Comment.updateOne({ _id: req.params.commentId }, { isDeleted: true }, { runValidators: true })
     // console.log("comment custom filter for delete",customFilter);
     // console.log((user?._id).toString() == comment?.userId.toString());
@@ -136,6 +146,10 @@ module.exports = {
       customFilter,
       { runValidators: true }
     );
+    // const isDeleted = (comment.isDeleted = true);
+    // const selectedBlog = await Blog.findOne({ _id: req.body.blogId });
+    const commentOfBlog = await Comment.find({blogId:req.body.blogId });
+    await Blog.updateOne({ _id: req.body.blogId },{comments:commentOfBlog });
 
     res.status(200).send({
       error: false,

@@ -18,8 +18,14 @@ import axios from "axios";
 const BlogDetails = () => {
   const { blogDetail } = useSelector((state) => state.blog);
   const { user } = useSelector((state) => state.auth);
-  const { getLike, getDetailPage, postComment, deleteComment, getComment } =
-    useBlogData();
+  const {
+    getLike,
+    updateComment,
+    getDetailPage,
+    postComment,
+    deleteComment,
+    getComment,
+  } = useBlogData();
   const { blogId } = useParams();
   const [likeStatus, setLikeStatus] = useState("");
   const { axiosWithToken } = useAxios();
@@ -39,7 +45,8 @@ const BlogDetails = () => {
   useEffect(() => {
     getDetailPage("blogDetail", blogId);
     getLike("blogs", blogId);
-  }, [likeStatus,comment,editCommentID, blogId]);
+    getComment("blogDetail", blogId);
+  }, [likeStatus,editComment,commentModal]);
   // console.log(blogId);
   const postLike = async () => {
     try {
@@ -68,7 +75,7 @@ const BlogDetails = () => {
   visitorCount = visitorCount == 0 ? 1 : visitorCount;
 
   const categoryId = blogDetail?.categoryId;
-  console.log("blogDetail?.comments",blogDetail?.comments);
+  console.log("blogDetail?.comments", blogDetail?.comments);
 
   const handleCommentEdit = async (id) => {
     console.log(id);
@@ -78,16 +85,19 @@ const BlogDetails = () => {
     console.log(check);
     // console.log(check[0].content);
     setEditComment(check[0].content);
-   setEditCommentID(id);
-
+    setEditCommentID(id);
   };
 
-  const handleCommentDelete = (commentId) => {
+  const handleCommentDelete = async (commentId) => {
     console.log(commentId);
     console.log(blogId);
-    deleteComment(commentId, blogId);
+    // deleteComment(commentId, blogId);
+    const data = await axiosWithToken.delete(`comments/${commentId}`)
+    console.log(data)
+    // const info = await axiosWithToken("comments")
+    // console.log(info)
   };
-console.log(editCommentID);
+  console.log(editCommentID);
   console.log(editComment);
   // console.log("user", user);
   // console.log("blogId", blogId);
@@ -124,7 +134,12 @@ console.log(editCommentID);
           <BlogPost content={blogDetail?.content} />
         </div>
 
-        <button className={detailStyle.button} onClick={() => setShow((prev) => !prev)}>Show comments</button>
+        <button
+          className={detailStyle.button}
+          onClick={() => setShow((prev) => !prev)}
+        >
+          Show comments
+        </button>
 
         {show && (
           <div className={detailStyle.comment}>
@@ -136,11 +151,25 @@ console.log(editCommentID);
                 ?.filter((comment) => comment.isDeleted == false)
                 .map((comment) => (
                   <div key={comment._id}>
-                    <div style={{display:"flex", justifyContent:"space-between", alignItems:"center", height:"40px"}}>
-                     {editComment ? <BlogPost content={comment?.content} edited={editComment}  />
-                     :
-                     <BlogPost content={comment?.content} />}
-                      {((user?.id == comment?.userId) || (user?.isAdmin || user?.isStaff)) && (
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        height: "40px",
+                      }}
+                    >
+                      {editComment ? (
+                        <BlogPost
+                          content={comment?.content}
+                          edited={editComment}
+                        />
+                      ) : (
+                        <BlogPost content={comment?.content} />
+                      )}
+                      {(user?.id == comment?.userId ||
+                        user?.isAdmin ||
+                        user?.isStaff) && (
                         <div>
                           <FaTrashAlt
                             onClick={() => handleCommentDelete(comment?._id)}
@@ -171,7 +200,11 @@ console.log(editCommentID);
             onChange={setComment}
           />
         )}
-        {show && !commentModal && <button className={detailStyle.button} onClick={handleComment}>Add Your Comment</button>}
+        {show && !commentModal && (
+          <button className={detailStyle.button} onClick={handleComment}>
+            Add Your Comment
+          </button>
+        )}
       </section>
       {editBlogModal && (
         <BlogModal
@@ -183,12 +216,14 @@ console.log(editCommentID);
       )}
       {commentModal && (
         <EditCommentModal
+          {...blogDetail}
           setEditComment={setEditComment}
           editComment={editComment}
           id={editCommentID}
           onClose={setCommentModal}
           userId={user?.id}
           blogId={blogId}
+          updateComment={updateComment}
         />
       )}
     </main>

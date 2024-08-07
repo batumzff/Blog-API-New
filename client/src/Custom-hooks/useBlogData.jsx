@@ -101,6 +101,25 @@ const useBlogData = () => {
   }
  }
 
+ const updateComment = async (url, commentId,blogId,updateData) => {
+  console.log("updateComment",url);
+  console.log("updateComment",commentId);
+  console.log(updateData);
+  dispatch(fetchStart());
+  try {
+    const { updatedData} = await axiosWithToken.put(`comments/${commentId}`,updateData);
+   
+    getComment("blogDetail",blogId)
+    
+     
+    console.log(updatedData)
+  } catch (error) {
+    dispatch(fetchFail());
+    console.log(error);
+  }
+
+ }
+
  const deleteComment = async (commentId,blogId) => {
   console.log(commentId);
   console.log(blogId);
@@ -158,7 +177,7 @@ const putBlog = async (url,blogId, postData) => {
   }
 };
 
-  return { getAllBlogData, getData, getLike, getDetailPage, getComment, postComment, getCategoryById, putBlog, deleteComment };
+  return { getAllBlogData, updateComment, getData, getLike, getDetailPage, getComment, postComment, getCategoryById, putBlog, deleteComment };
 };
 
 export default useBlogData;

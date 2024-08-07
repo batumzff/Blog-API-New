@@ -32,8 +32,18 @@ const BlogSlice = createSlice({
     getSingleData: (state, { payload }) => {
       state.loading = false;
       state.error = false;
-      if(payload.data && typeof payload.data == "object" && "updatedData" in payload.data){ state[payload.url] = payload.data.updatedData}else {
+      if(payload.data && typeof payload.data == "object" && "updatedData" in payload.data ){ state[payload.url] = payload.data.updatedData
+        console.log(payload.data.updatedData)
+      }
+      // else if(payload["updatedData"]) { state[payload.url] = payload.updatedData
+      //   console.log("elseif",payload.updatedData)
+      // }
+
+      else {
         state[payload.url] = payload.data.data
+        console.log("payload",payload)
+        console.log("payload.data",payload.data)
+        // console.log("payload.data.data",payload.data.data)
       }
     },
 
