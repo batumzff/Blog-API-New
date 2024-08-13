@@ -31,7 +31,7 @@ module.exports = {
       : {};
     // const blogs = await Blog.find({ userId: req.user?._id });
     // console.log(blogs);
-    console.log(blogStatus);
+    // console.log(blogStatus);
 
     const data = await res.getModelList(Blog,  {...blogStatus} , [
       "userId",

@@ -96,13 +96,13 @@ module.exports = {
     );
     // const commentsOfBlog = await Comment.find({ post });
     const comment = await Comment.find({blogId:req.body.blogId });
-    console.log("burasiiiiiiiiiiiiiiiiii",comment);
     
-    const deneme = await Blog.updateOne({ _id: req.body.blogId },{comments:comment } );
-    // console.log("comment data",data);
+    
+    await Blog.updateOne({ _id: req.body.blogId },{comments:comment } );
+    
     // const updatedData = await Comment.findOne({ _id: req.params.commentId, isDeleted: false })
 
-    console.log("****************************************deneme****************************", deneme);
+    
 
     res.status(202).send({
       error: false,
@@ -149,9 +149,9 @@ module.exports = {
     // const isDeleted = (comment.isDeleted = true);
     // const selectedBlog = await Blog.findOne({ _id: req.body.blogId });
     const commentOfBlog = await Comment.find({blogId:comment?.blogId });
-    console.log("üüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüü",comment?.blogId)
+    // console.log("üüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüü",comment?.blogId)
     const bişeyler = await Blog.updateOne({ _id: comment?.blogId },{comments:commentOfBlog });
-    console.log(bişeyler)
+    // console.log(bişeyler)
 
     res.status(200).send({
       error: false,
