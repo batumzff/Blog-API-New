@@ -1,13 +1,16 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import useBlogData from "../../Custom-hooks/useBlogData";
 import { useNavigate } from "react-router-dom";
 import categoriesStyle from "./Categories.module.scss"
+import useAxios from "../../Custom-hooks/useAxios";
 
 const Categories = () => {
   const { categories } = useSelector((state) => state.blog);
   const { getData, getCategoryById } = useBlogData();
+  const {axiosWithToken} = useAxios()
   const navigate = useNavigate();
+  const [add, setAdd] = useState("")
 
   
   useEffect(() => {
@@ -26,6 +29,14 @@ const Categories = () => {
       console.log(error);
     }
   };
+  const addCategory = async (e)=>{
+    e.preventDefault()
+    const postData = {name:add}
+    const data = await axiosWithToken.post("categories", postData)
+    // console.log(data)
+    getData("categories")
+  }
+  // console.log(add)
 
  
   return (
@@ -39,8 +50,9 @@ const Categories = () => {
           ))}
         </div>
         <div>
-          <h4>Add Category</h4>
-          <input type="text"  />
+          
+          <input type="text" name="category" onChange={(e)=>setAdd(e.target.value)}/>
+          <button onClick={addCategory} type="submit">Add Category</button>
         </div>
         </div>
         

@@ -2,13 +2,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 $primary-color: #3498db;
-$text-color: #333;
-$background-color: #fff;
+$text-color: #FDE49E;
+$background-color: #6DC5D1;
 $header-height: 60px;
 
 header {
   padding: .5rem;
-  background-color: #fff;
+  background-color: #6DC5D1;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   height: 100px;
   position: relative;
@@ -48,7 +48,7 @@ header {
         text-decoration: none;
         position: relative;
         display: inline-block;
-        color: #E41F7B;
+        color: #000000;
         &::after {
           content: "";
           position: absolute;
@@ -59,7 +59,7 @@ header {
           bottom: 0;
           transform-origin: bottom right;
           transition: transform 0.25s ease-out;
-          background-color: blueviolet;
+          background-color: #DD761C;
         }
         &:hover::after {
           transform: scaleX(1);

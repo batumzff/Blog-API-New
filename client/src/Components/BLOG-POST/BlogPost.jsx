@@ -1,9 +1,10 @@
 import React from "react";
 import DOMPurify from "dompurify";
+import style from "./BlogPost.module.scss"
 
 const BlogPost = ({ content }) => {
   return (
-    <div  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content, { USE_PROFILES: { html: true } }) }} />
+    <div className={style.blogPost} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content, { USE_PROFILES: { html: true } }) }} />
   );
 };
 

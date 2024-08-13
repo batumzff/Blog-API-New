@@ -9,6 +9,7 @@ const CategorySchema = new Schema({
         type: String,
         trim: true,
         required: true,
+        unique:true,
         index: true,
         set: (name) => name.toUpperCase()
     }
