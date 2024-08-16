@@ -1,7 +1,7 @@
 @import "../../../scss/abstract/mixins";
 .footer {
   margin-top: 1rem;
-  width: 100%;
+  width: 100svw;
   padding: 1.7rem 0;
   // position: absolute;
   // bottom: 0;
@@ -10,7 +10,7 @@
   background-size: contain;
   background-position: left;
   background-color: #22283174;
-
+  
   & .container {
     @include flex($jc: space-between);
     // max-width: 1200px;
@@ -21,6 +21,7 @@
       font-size: 1.2rem;
       margin-bottom: 20px;
       margin-left: 280px;
+      font-family: "Akaya Telivigala",serif;
     }
 
     & .footer-icons {
@@ -57,7 +58,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 640px) {
 
   .footer {
     background-image: url("../../assets/logo-2.png") no-repeat;
@@ -67,11 +68,7 @@
   }
   .container {
     padding: 20px 10px;
-    justify-content: center;
-  }
-
-  .message {
-    font-size: "10px";
+    justify-content: space-between;
   }
 
   .footer-icons {
@@ -83,5 +80,11 @@
         font-size: "x-small";
       }
     }
+  }
+}
+
+@media (max-width: 770px) {
+  .message {
+    visibility: hidden;
   }
 }

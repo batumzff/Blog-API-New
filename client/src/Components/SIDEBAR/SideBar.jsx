@@ -10,44 +10,30 @@ const navigation = [
   { name: "Profile", to: "/my-profile" },
   { name: "New Blog", to: "/new-blog" },
   { name: "About", to: "/about" },
+  { name: "Contact", to: "/contact" },
   // { name: "Login", to: "/login" },
   // { name: "Register", to: "/register" },
 ];
 
-const SideBar = () => {
+const SideBar = ({onClose}) => {
   const { token } = useSelector((state) => state.auth);
   const { logout } = useAuthCalls();
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
-  // console.log(token);
 
-  // useEffect(() => {
-  //   const handleClickOutside = (e) => {
-  //     if (isActive && !e.target.closest(`.${SideStyle.container}`)) {
-  //       console.log(e.target);
-  //       console.log(isActive);
-  //       onClose();
-  //     }
-  //   };
-
-  //   document.body.addEventListener("click", handleClickOutside);
-
-  //   return () => {
-  //     document.body.removeEventListener("click", handleClickOutside);
-  //   };
-  // }, [isActive, onClose]);
-  // console.log(user);
-
+  const handleClose = () => {
+    onClose(false)
+  }
+ 
   const handleLogout = () => {
     logout();
     navigate("/");
   };
   return (
     <section className={SideStyle.container}>
-      <main>
+      <main className={SideStyle.main}>
         <section className={SideStyle.navigation}>
           {navigation.map((item) => (
-            <div key={item.name}>
+            <div key={item.name}  onClick={handleClose} className={SideStyle["link-div"]}>
               <Link to={item.to}>{item.name}</Link>
             </div>
           ))}

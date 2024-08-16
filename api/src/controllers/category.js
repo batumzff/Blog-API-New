@@ -22,6 +22,7 @@ module.exports = {
 
 
         const data = await Category.find()
+        // const data = await res.getModelList(Category,{},"userId")
 
         res.status(200).send({
             error: false,

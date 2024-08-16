@@ -2,12 +2,13 @@
 
 $primary-color: #3498db;
 $text-color: #333;
-$background-color: #f4f4f4;
+$background-color: #FDE49E;
 $card-background-color: #fff;
 $card-border-color: #ddd;
 $container-padding: 20px;
 
 .home-main {
+  min-height: 100dvh ;
   display: flex;
   justify-content: center;
   padding: $container-padding;

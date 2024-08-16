@@ -2,20 +2,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 $primary-color: #3498db;
-$text-color: #FDE49E;
-$background-color: #6DC5D1;
+$text-color: #333;
+$background-color: #fff;
 $header-height: 60px;
 
 header {
   padding: .5rem;
-  background-color: #6DC5D1;
+  background-color: #fff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   height: 100px;
   position: relative;
-  width: 100%;
+  width: 100svw;
   top: 0;
   z-index: 10;
-
+  font-family: "Anta";
   & nav {
   @include flex($jc:space-between);
   padding: 0 20px;
@@ -48,7 +48,7 @@ header {
         text-decoration: none;
         position: relative;
         display: inline-block;
-        color: #000000;
+        color: #E41F7B;
         &::after {
           content: "";
           position: absolute;
@@ -59,7 +59,7 @@ header {
           bottom: 0;
           transform-origin: bottom right;
           transition: transform 0.25s ease-out;
-          background-color: #DD761C;
+          background-color: blueviolet;
         }
         &:hover::after {
           transform: scaleX(1);
@@ -93,30 +93,15 @@ header {
 
       @media (max-width: 768px) {
         width: 100%;
-        display: flex;
-        justify-content: flex-end;
+       @include flex($jc:flex-end);
       }
     }
+
+    @media (max-width: 422px) {
+       span {
+        display: none;
+       }
+    }
+
   }
 }
-
-// .sidebar {
-//   // position: fixed;
-//   // top: 100px;
-//   // right: 0;
-//   // width: 250px;
-//   // height: calc(100% - 60px);
-//   // background-color: #fff;
-//   // box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-//   // padding: 20px;
-//   // z-index: 9;
-//   // transition: transform 0.3s ease-in-out;
-
-//   @media (max-width: 768px) {
-//     width: 100%;
-//     height: calc(100% - 60px);
-//     transform: translateX(100%);
-//     transition: transform 0.3s ease-in-out;
-//   }
-// }
-
