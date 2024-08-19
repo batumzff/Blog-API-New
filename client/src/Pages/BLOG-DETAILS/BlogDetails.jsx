@@ -88,17 +88,14 @@ const BlogDetails = () => {
     setEditCommentID(id);
   };
 
-
-  const handleCommentDelete =  (commentId) => {
-
+  const handleCommentDelete = (commentId) => {
     try {
-      console.log("delete run")
+      console.log("delete run");
       deleteComment(commentId, blogId);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-    console.log(commentId)
-     
+    console.log(commentId);
   };
   console.log(editCommentID);
   console.log(editComment);
@@ -138,10 +135,11 @@ const BlogDetails = () => {
         </div>
 
         <button
+          data-test="showHideComments"
           className={detailStyle.button}
           onClick={() => setShow((prev) => !prev)}
         >
-          {show ? "Hide":"Show"} comments
+          {show ? "Hide" : "Show"} Comments
         </button>
 
         {show && (

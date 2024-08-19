@@ -1,29 +1,24 @@
-// ! blog modal
+
 $primary-color: #3498db;
 $secondary-color: #bd10e0;
+
+
 $text-color: #333;
 
-// !
-
-// % navbar
 $background-color: #fff;
-// %
-
-
-// 
-$background-color: rgba(238, 232, 232, 0.949);
-$box-shadow-color: rgba(92, 84, 112, 0.37);
-// 
-
-//  blog
-
 $background-color2: #f4f4f4;
-// 
+$background-color3: #eee8e8f2;
 
-// home
+$box-shadow-color: #5c54705e;
+
+$form-background-color: #fff;
+$form-border-color: #ddd;
+
+
 $card-border-color: #ddd;
-// 
 
-// login
+
 $error-color: #e74c3c;
-// 
+
+
+$hover-color: lighten($primary-color, 10%);

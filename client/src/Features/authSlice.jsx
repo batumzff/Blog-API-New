@@ -15,6 +15,7 @@ const initialState = {
   },
   loading: false,
   error: false,
+  errorMessage: "",
   token: ""
 };
 
@@ -93,9 +94,13 @@ const AuthSlice = createSlice({
       };
     },
 
-    fetchFail: (state) => {
+    fetchFail: (state, {payload}) => {
       state.loading = false;
       state.error = true;
+      state.errorMessage = payload?.response?.data?.message
+    },
+    clearError: (state) => {
+      state.error = false;
     },
   },
 });
@@ -106,7 +111,8 @@ export const {
   loginSuccess,
   logoutSuccess,
   registerSuccess,
-  updateUserInfo 
+  updateUserInfo,
+  clearError 
 } = AuthSlice.actions;
 
 export default AuthSlice.reducer;

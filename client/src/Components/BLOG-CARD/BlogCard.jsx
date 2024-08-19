@@ -24,6 +24,7 @@ const BlogCard = () => {
                 className={style["card-link"]}
               >
                 <div
+                  data-test="blogDetailButton"
                   className={style["card-img-hovered"]}
                   style={{
                     backgroundImage: `url(${blog?.image[0]})`,
