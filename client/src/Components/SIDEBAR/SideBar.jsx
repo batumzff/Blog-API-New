@@ -41,10 +41,10 @@ const SideBar = ({onClose}) => {
             <div className={SideStyle.logout} onClick={handleLogout}>Log out</div>
           ) : (
             <>
-              <div>
+              <div onClick={handleClose}>
                 <Link to="/login">Login</Link>
               </div>
-              <div>
+              <div onClick={handleClose}>
                 <Link to="/register">Register</Link>
               </div>
             </>

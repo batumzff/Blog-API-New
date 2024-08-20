@@ -1,6 +1,6 @@
 @import "../../../scss/abstract/mixins";
 .footer {
-  margin-top: 1rem;
+  // margin-top: 1rem;
   width: 100svw;
   padding: 1.7rem 0;
   // position: absolute;
@@ -72,6 +72,7 @@
   }
 
   .footer-icons {
+     
     flex-wrap: wrap;
     justify-content: flex-end;
 
@@ -81,10 +82,25 @@
       }
     }
   }
+  
 }
 
 @media (max-width: 770px) {
   .message {
-    visibility: hidden;
+    display: none;
+  }
+  .container {
+    justify-content: flex-end !important;
+  }
+  
+  
+}
+@media (max-width: 580px) {
+  .footer {
+    background-position: center;
+  }
+  .footer-icons {
+    display: none !important;
+    
   }
 }

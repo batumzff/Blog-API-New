@@ -1,17 +1,10 @@
 @import "../../../scss/abstract/mixins";
+@import "../../../scss/abstract/colors";
 
-$primary-color: #3498db;
-$text-color: #333;
-$error-color: #e74c3c;
-$background-color: #f4f4f4;
-$form-background-color: #fff;
-$form-border-color: #ddd;
 $container-padding: 20px;
 
 .new-blog-main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flex($fd: column);
   min-height: 100vh;
   background-color: $background-color;
 }
@@ -69,23 +62,5 @@ $container-padding: 20px;
 }
 
 button {
-  width: 100%;
-  padding: 10px;
-  background-color: $primary-color;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 1em;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: darken($primary-color, 10%);
-  }
-
-  &:disabled {
-    background-color: lighten($primary-color, 20%);
-    cursor: not-allowed;
-  }
+  @include button($w: 100%);
 }
-

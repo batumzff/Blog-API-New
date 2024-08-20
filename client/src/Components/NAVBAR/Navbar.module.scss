@@ -7,7 +7,7 @@ $background-color: #fff;
 $header-height: 60px;
 
 header {
-  padding: .5rem;
+  
   background-color: #fff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   height: 100px;
@@ -24,9 +24,16 @@ header {
 
     & .logo {
      @include flex();
+     @media (max-width : 285px){
+      img {
+        width: 100%;
+        margin: 0;
+      }
+    }
 
      &  img {
       margin-right: 10px;
+      
     }
 
     & span {

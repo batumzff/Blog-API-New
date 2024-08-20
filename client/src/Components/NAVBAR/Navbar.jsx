@@ -75,7 +75,7 @@ useEffect(() => {
       </nav>
       {sidebar && (
             <div className={NavbarStyle.sidebar} ref={sideRef}>
-              <SideBar/>
+              <SideBar onClose={setSidebar}/>
             </div>
           )}
     </header>

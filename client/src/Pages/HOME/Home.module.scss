@@ -1,14 +1,11 @@
 @import "../../../scss/abstract/_mixins.scss";
+@import "../../../scss/abstract/_colors.scss";
 
-$primary-color: #3498db;
-$text-color: #333;
-$background-color: #FDE49E;
-$card-background-color: #fff;
-$card-border-color: #ddd;
+
 $container-padding: 20px;
 
 .home-main {
-  min-height: 100dvh ;
+  min-height: 100dvh;
   display: flex;
   justify-content: center;
   padding: $container-padding;
@@ -16,17 +13,15 @@ $container-padding: 20px;
 }
 
 .container {
-  display: flex;
+  @include flex();
   flex-wrap: wrap;
-  gap: 20px;
   max-width: 1200px;
   width: 100%;
-  justify-content: center;
 }
 
 .blog-card {
-  background-color: $card-background-color;
-  border: 1px solid $card-border-color;
+  background-color: $background-color;
+  border: 1px solid $form-border-color;
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -48,9 +43,10 @@ $container-padding: 20px;
 
   img {
     width: 100%;
-    height: auto;
+    height: 250px;
+    object-fit: fill;
     display: block;
-    border-bottom: 1px solid $card-border-color;
+    border-bottom: 1px solid $form-border-color;
   }
 }
 
