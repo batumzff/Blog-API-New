@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import modalBlogStyle from "./BlogModal.module.scss";
+import style from "./BlogModal.module.scss";
 import ReactQuill from "react-quill";
 import { modules } from "../../Helpers/quillModules";
 import { useSelector } from "react-redux";
@@ -71,13 +71,13 @@ console.log(inputs);
   
 
   return (
-    <main className={modalBlogStyle["modal-main"]}>
+    <main  className={style["modal-main"]}>
       {open && (
-        <div className={modalBlogStyle["modal"]}>
-          {/* <button onClick={() => setOpen((prev) => !prev)}>X</button> */}
+        <div className={style["modal"]}>
+          
 
-          <form onSubmit={handleSubmit}>
-            <div className={modalBlogStyle["input-group"]}>
+          <form  onSubmit={handleSubmit}>
+            <div className={style["input-group"]}>
               <label htmlFor="title">Title</label>
               <input
                 type="text"
@@ -90,14 +90,14 @@ console.log(inputs);
             <div>
               <label htmlFor="content">Content</label>
               <ReactQuill
-                className={modalBlogStyle.quill}
+                className={style.quill}
                 theme="snow"
                 value={text}
                 onChange={setText}
                 modules={modules}
               />
             </div>
-            <div className={modalBlogStyle["input-group"]}>
+            <div className={style["input-group"]}>
               <label htmlFor="image">Image Url</label>
               <input
                 type="text"
@@ -107,7 +107,7 @@ console.log(inputs);
                 onChange={handleForm}
               />
             </div>
-            <div className={modalBlogStyle["input-group"]}>
+            <div className={style["input-group"]}>
               <select
                 key={Date.now()}
                 name="categoryId"
@@ -124,7 +124,7 @@ console.log(inputs);
                 ))}
               </select>
             </div>
-            <div className={modalBlogStyle["input-group"]}>
+            <div className={style["input-group"]}>
               <select
                 name="isPublish"
                 id="isPublish"
@@ -136,8 +136,10 @@ console.log(inputs);
                 <option value="false">Draft</option>
               </select>
             </div>
-            <button>Submit</button>
-            <button style={{marginLeft:"1rem", backgroundColor:"#ED0800"}} onClick={()=> onClose(false)}>Close</button>
+            <section className={style.button}>
+             <button>Submit</button>
+            <button style={{ backgroundColor:"#ED0800"}} onClick={()=> onClose(false)}>Close</button>  
+            </section>
           </form>
         </div>
       )}

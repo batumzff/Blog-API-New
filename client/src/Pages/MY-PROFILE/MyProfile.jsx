@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import useAuthCalls from "../../Custom-hooks/useAuthCalls";
 import DOMPurify from "dompurify";
@@ -6,12 +6,24 @@ import profileStyles from "./MyProfile.module.scss";
 import BlogPost from "../../Components/BLOG-POST/BlogPost";
 import QuillEditor from "../../Components/QUILL/QuillEditor";
 import { formRegisterInputs } from "../../Helpers/formInputs";
+import useBlogData from "../../Custom-hooks/useBlogData";
+import BlogCard from "../../Components/BLOG-CARD/BlogCard";
 
 const MyProfile = () => {
   const { updatedUser } = useAuthCalls();
   const { user } = useSelector((state) => state.auth);
+  const { blogs } = useSelector((state) => state.blog);
+  const [show, setShow] = useState(false)
 
-  console.log(user);
+  const { getData } = useBlogData()
+  useEffect(() => {
+    getData("blogs")
+  }, [])
+
+  const userBlogs = blogs?.filter(blog => blog.userId._id == user?.id)
+
+  // console.log(userBlogs)
+  // console.log(user);
   const inputRefs = useRef({
     username: user?.username,
     firstName: user?.firstName,
@@ -49,6 +61,10 @@ const MyProfile = () => {
     setUserModal(false);
   };
 
+  const showMyBlogs = () => {
+    setShow(prev => !prev)
+  }
+
   return (
     <main className={profileStyles.main}>
       <section className={profileStyles["profile-header"]}>
@@ -65,7 +81,7 @@ const MyProfile = () => {
         <BlogPost content={user?.biography} />
       </section>
       <button onClick={() => setUserModal(!userModal)}>Edit Profile</button>
-      <button>my blogs</button>
+      <button onClick={showMyBlogs}>my blogs</button>
 
       {userModal && (
         <div>
@@ -98,6 +114,11 @@ const MyProfile = () => {
             <button>Submit</button>
           </form>
         </div>
+      )}
+      {show && (
+        <section>
+        <BlogCard detail={userBlogs} />
+      </section>
       )}
     </main>
   );

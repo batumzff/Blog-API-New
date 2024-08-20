@@ -115,7 +115,7 @@ const NewBlog = () => {
             </div>
             <div className={newBlogStyle["input-group"]}>
               <select
-                key={Date.now()}
+                
                 name="categories"
                 id="categories"
                 value={inputRefs.categories}
@@ -124,7 +124,7 @@ const NewBlog = () => {
               >
                 <option>Select Category</option>
                 {categories?.map((category) => (
-                  <option value={category._id}>{category.name}</option>
+                  <option key={category._id} value={category._id}>{category.name}</option>
                 ))}
               </select>
             </div>

@@ -1,11 +1,8 @@
 @import "../../../scss/abstract/mixins";
-
-$primary-color: #3498db;
-$secondary-color: #bd10e0;
-$text-color: #333;
+@import "../../../scss/abstract/colors";
 
 .modal-main {
-  @include flex($fd: column);
+  
   position: fixed;
   top: 50%;
   left: 50%;
@@ -14,26 +11,21 @@ $text-color: #333;
   height: 100%;
   overflow-y: scroll;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
+  z-index: 99;
 
   & .modal {
-    background-color: #fde49e;
+    background-color: white;
     padding: 20px;
-    border-radius: 10px;
+    // border-radius: 10px;
     max-width: 600px;
     width: 100%;
     box-shadow: 0 8px 32px 0 rgba(92, 84, 112, 0.37);
     position: relative;
-
-    & h2.title {
-      color: #333;
-      font-size: 1.5rem;
-      font-weight: bold;
-      margin-bottom: 1rem;
-    }
+    left: 50%;
+    transform: translate(-50%);
 
     & .input-group {
-      margin-bottom: 20px;
+      margin-top: 20px;
 
       & label {
         display: block;
@@ -52,6 +44,13 @@ $text-color: #333;
       }
     }
 
+    & .button {
+      @include flex();
+      & button {
+        @include button();
+      }
+    }
+
     .quill {
       margin-bottom: 20px;
       & button {
@@ -61,29 +60,19 @@ $text-color: #333;
           background-color: #3498db;
         }
       }
+      & .ql-toolbar {
+        height: 1rem !important;
+      }
     }
 
     button {
-      @include button() ;
-      // padding: 10px 20px;
-        // background-color: $primary-color;
-        // color: white;
-        // border: none;
-        // border-radius: 5px;
-        // font-size: 1rem;
-        // cursor: pointer;
-        // transition: background-color 0.3s ease;
-        // &:hover {
-        //   background-color: $secondary-color;
-        // }
-;
+      @include button($p: 5px, $w: 2rem);
     }
 
     @media (max-width: 768px) {
       .modal {
         padding: 10px;
         max-width: 90%;
-        background-color: #fde49e;
       }
 
       .input-group label {
