@@ -14,7 +14,7 @@ const Categories = () => {
   const navigate = useNavigate();
   const [add, setAdd] = useState("");
   const [edit, setEdit] = useState(false);
-  const [editId, setEditId] = useState("")
+  const [editId, setEditId] = useState("");
 
   useEffect(() => {
     getData("categories");
@@ -42,27 +42,26 @@ const Categories = () => {
   // console.log(add)
 
   const handleEditChange = (id) => {
-    setEdit(true)
+    setEdit(true);
     const info = categories.filter((category) => category._id == id);
     // console.log(info);
     // console.log(info[0]._id)
     let name = info[0].name;
     // console.log(name);
     setAdd(name);
-    setEditId(info[0]._id)
-   
+    setEditId(info[0]._id);
   };
   // console.log(add)
-  const handleCategoryEdit = async ( ) =>{
+  const handleCategoryEdit = async () => {
     const postData = { categoryId: editId, name: add };
     // console.log(postData);
 
     const data = await axiosWithToken.put(`categories/${editId}`, postData);
     // console.log(data);
     getData("categories");
-    setAdd("")
-    setEdit(false)
-  }
+    setAdd("");
+    setEdit(false);
+  };
 
   return (
     <div className={categoriesStyle.container}>
@@ -93,10 +92,12 @@ const Categories = () => {
             onChange={(e) => setAdd(e.target.value)}
           />
           {
-
-          <button onClick={edit ? handleCategoryEdit : addCategory} type="submit">
-            {edit ? "Edit Category" : "Add Category"}
-          </button>
+            <button
+              onClick={edit ? handleEdit : addCategory}
+              disabled={add.trim() == "" && "disabled"}
+            >
+              {edit ? "Edit Category" : "Add Category"}
+            </button>
           }
         </div>
       </div>
