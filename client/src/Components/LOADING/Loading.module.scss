@@ -1,0 +1,48 @@
+@import "../../../scss/abstract/mixins";
+@import "../../../scss/abstract/colors";
+
+
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 30rem;
+    height: 30rem;
+  }
+.main {
+    width: 64px;
+    height: 64px;
+    position: relative;
+    display: inline-block;
+  }
+  
+  .main::before, .main::after {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    width: 20rem;
+    height: 20rem;
+    border: 8px solid transparent;
+    border-radius: 50%;
+  }
+  
+  .main::before {
+    border-top-color: #3498db;
+    animation: main 1.5s infinite;
+  }
+  
+  .main::after {
+    border-bottom-color: #f39c12;
+    animation: main 1.5s infinite alternate;
+  }
+  
+  @keyframes main {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  

@@ -1,7 +1,6 @@
-$primary-color: #3498db;
-$secondary-color: #bd10e0;
-$text-color: #333;
-$background-color: #f4f4f4;
+@import "../../../scss/abstract/mixins";
+@import "../../../scss/abstract/colors";
+
 
 .main {
   padding: 20px;
@@ -95,18 +94,20 @@ $background-color: #f4f4f4;
   }
 
   .button {
-    margin: 10px auto;
-    padding: 10px 20px;
-    background-color: $primary-color;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    // margin: 10px auto;
+    // padding: 10px 20px;
+    // background-color: $primary-color;
+    // color: white;
+    // border: none;
+    // border-radius: 5px;
+    // font-size: 1rem;
+    // cursor: pointer;
+    // transition: background-color 0.3s ease;
+    // width: ;
 
-    &:hover {
-      background-color: $secondary-color;
-    }
+    // &:hover {
+    //   background-color: $secondary-color;
+    // }
+    @include button();
   }
 }
