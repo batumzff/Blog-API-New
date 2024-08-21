@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import style from "./BlogModal.module.scss";
-import ReactQuill from "react-quill";
-import { modules } from "../../Helpers/quillModules";
 import { useSelector } from "react-redux";
 import DOMPurify from "dompurify";
 import useBlogData from "../../Custom-hooks/useBlogData";
-import useAxios from "../../Custom-hooks/useAxios";
 import { useNavigate } from "react-router-dom";
-import BlogPost from "../BLOG-POST/BlogPost";
+import QuillEditor from "../QUILL/QuillEditor";
 
 const BlogModal = ({
   title,
@@ -16,12 +13,12 @@ const BlogModal = ({
   blogId,
   content,
   categoryId,
-  onClose
+  onClose,
+  postBlog,
 }) => {
   const { categories } = useSelector((state) => state.blog);
   const { user } = useSelector((state) => state.auth);
   const { getData, putBlog } = useBlogData();
-  const { axiosWithToken } = useAxios();
   const navigate = useNavigate();
 
   const [open, setOpen] = useState(true);
@@ -34,11 +31,12 @@ const BlogModal = ({
   });
   const [text, setText] = useState(content);
 
+  const quillRef = useRef("");
+
   useEffect(() => {
     getData("categories");
   }, []);
 
-  
   const handleForm = (e) => {
     const { name, value } = e.target;
 
@@ -48,35 +46,38 @@ const BlogModal = ({
     });
   };
 
-console.log(inputs);
-  const handleSubmit =  (e) => {
+  // console.log(inputs);
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const sanitizedContent = DOMPurify.sanitize(text, { USE_PROFILES: { html: true } });
+    // console.log(quillRef.current.value)
+    const sanitizedContent = DOMPurify.sanitize(quillRef.current.value, {
+      USE_PROFILES: { html: true },
+    });
     const postData = {
       ...inputs,
       content: sanitizedContent,
+      categories: inputs.categoryId,
     };
-    
-     putBlog("blogDetail",blogId, postData);
+    // console.log(postData)
+
+    blogId
+      ? putBlog("blogDetail", blogId, postData)
+      : postBlog("blogs", postData);
     setInputs({ title: "", image: "", categoryId: "", isPublish: "" });
     setText("");
-    onClose()
-    navigate(`/blog-details/${blogId}`);
+    onClose();
+    blogId ? navigate(`/blog-details/${blogId}`) : navigate("/blogs");
   };
 
   const categoryName = (categories?.filter(
     (category) => category._id == categoryId
   ))[0]?.name;
 
-  
-
   return (
-    <main  className={style["modal-main"]}>
+    <main className={style["modal-main"]}>
       {open && (
         <div className={style["modal"]}>
-          
-
-          <form  onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}>
             <div className={style["input-group"]}>
               <label htmlFor="title">Title</label>
               <input
@@ -89,13 +90,8 @@ console.log(inputs);
             </div>
             <div>
               <label htmlFor="content">Content</label>
-              <ReactQuill
-                className={style.quill}
-                theme="snow"
-                value={text}
-                onChange={setText}
-                modules={modules}
-              />
+
+              <QuillEditor value={content} ref={quillRef} />
             </div>
             <div className={style["input-group"]}>
               <label htmlFor="image">Image Url</label>
@@ -108,18 +104,17 @@ console.log(inputs);
               />
             </div>
             <div className={style["input-group"]}>
+              <label>Categories*</label>
               <select
-                key={Date.now()}
                 name="categoryId"
                 id="categories"
                 value={inputs.categoryId}
                 onChange={handleForm}
+                required
               >
-                <option value={categoryId}>{categoryName}</option>
                 {categories?.map((category) => (
-                  <option value={category._id}>
-                    {category.name == categoryName ? "" : category.name}
-                    {/* {category.name} */}
+                  <option key={category._id} value={category._id}>
+                    {category.name}
                   </option>
                 ))}
               </select>
@@ -137,8 +132,13 @@ console.log(inputs);
               </select>
             </div>
             <section className={style.button}>
-             <button>Submit</button>
-            <button style={{ backgroundColor:"#ED0800"}} onClick={()=> onClose(false)}>Close</button>  
+              <button>Submit</button>
+              <button
+                style={{ backgroundColor: "#ED0800" }}
+                onClick={() => onClose(false)}
+              >
+                Close
+              </button>
             </section>
           </form>
         </div>

@@ -8,7 +8,7 @@ import SideStyle from "./SideBar.module.scss";
 const navigation = [
   { name: "Blogs", to: "/blogs" },
   { name: "Profile", to: "/my-profile" },
-  { name: "New Blog", to: "/new-blog" },
+  // { name: "New Blog", to: "/new-blog" },
   { name: "About", to: "/about" },
   { name: "Contact", to: "/contact" },
   // { name: "Login", to: "/login" },
@@ -38,7 +38,12 @@ const SideBar = ({onClose}) => {
             </div>
           ))}
           {token ? (
+            <>
+            <div onClick={handleClose}>
+                <Link to="/new-blog">New Blog</Link>
+              </div>
             <div className={SideStyle.logout} onClick={handleLogout}>Log out</div>
+            </>
           ) : (
             <>
               <div onClick={handleClose}>

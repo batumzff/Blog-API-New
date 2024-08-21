@@ -7,6 +7,7 @@ import { modules } from "../../Helpers/quillModules";
 // Forwarding the ref for accessing the Quill editor instance
 const QuillEditor = forwardRef(({ value }, ref) => {
   const quillRef = useRef(null);
+  console.log(value)
 
   useEffect(() => {
     if (quillRef.current) {

@@ -23,6 +23,9 @@
     position: relative;
     left: 50%;
     transform: translate(-50%);
+    & .form {
+      color: $text-color;
+    }
 
     & .input-group {
       margin-top: 20px;

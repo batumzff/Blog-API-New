@@ -1,59 +1,9 @@
-// @import "../../../scss/abstract/mixins";
-
-// .container {
-//   position: relative;
-
-//   min-width: 100svw;
-//   min-height: 100dvh;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-// }
-// .main {
-//   top: 50%;
-//   left: 50%;
-//   transform: translate(-50% -50%);
-//   width: 64px;
-//   height: 64px;
-//   position: relative;
-//   display: inline-block;
-// }
-
-// .main::before,
-// .main::after {
-//   content: "";
-//   box-sizing: border-box;
-//   position: absolute;
-//   width: 20rem;
-//   height: 20rem;
-//   border: 8px solid transparent;
-//   border-radius: 50%;
-// }
-
-// .main::before {
-//   border-top-color: #3498db;
-//   animation: main 1.5s infinite;
-// }
-
-// .main::after {
-//   border-bottom-color: #f39c12;
-//   animation: main 1.5s infinite alternate;
-// }
-
-// @keyframes main {
-//   0% {
-//     transform: rotate(0deg);
-//   }
-//   100% {
-//     transform: rotate(360deg);
-//   }
-// }
 @import "../../../scss/abstract/mixins";
 
 .container {
-  position: absolute; 
-  top: 0;
-  left: 0;
+  // position: absolute; 
+  // top: 0;
+  // left: 0;
   width: 100vw; 
   height: 100vh;
   display: flex;
@@ -62,8 +12,9 @@
 }
 
 .main {
-  top: 50%;
-  left: 50%;
+  // top:50%;
+  bottom: 10%;
+  left:50%;
   transform: translate(-50%, -50%);
   width: 64px;
   height: 64px;

@@ -1,6 +1,5 @@
 @import "../../../scss/abstract/mixins";
 
-
 /* RESET */
 * {
   margin: 0;
@@ -44,6 +43,8 @@ body {
 }
 
 .card {
+  height: 450px;
+  width: 350px;
   align-self: flex-start;
   position: relative;
   width: 325px;
@@ -78,7 +79,11 @@ body {
   }
 
   .card-info {
-    position: relative;
+    // position: relative;
+    display: flex;
+    height: 350;
+    flex-direction: column;
+    justify-content: space-between;
     padding: 0.75rem 1.25rem;
     transition: all 200ms ease-in-out;
 
@@ -121,17 +126,22 @@ body {
       padding-bottom: 1.7rem;
       transition: all 350ms ease-in-out;
 
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      overflow: hidden; /* Ensures overflow is hidden */
-      text-overflow: ellipsis; /* Adds ellipsis for truncated text */
-      -webkit-line-clamp: 3; /* Limits text to 3 lines */
+      display: -webkit-box; /* Ensures the content is treated as a box */
+      -webkit-box-orient: vertical; /* Controls the direction of the box */
+      -webkit-line-clamp: 3; /* Limits the text to 3 lines */
+      overflow: hidden; /* Hides the overflowing content */
+      text-overflow: ellipsis; /* Adds ellipsis (...) for truncated text */
+      max-width: 100%; /* Ensures the text container doesn’t exceed the container width */
       white-space: normal; /* Ensures text wraps to new lines */
       word-wrap: break-word; /* Breaks long words to prevent overflow */
-      max-width: 100%; /* Ensures element doesn't exceed container width */
+      line-height: 1.5rem; /* Sets the line height (adjust as needed) */
+      height: calc(1.5rem * 3); /* 3 lines of text based on line height */
     }
 
     .card-creator {
+      position: absolute;
+      left: 5px;
+      bottom: 10px;
       padding-bottom: 0.75rem;
       transition: all 250ms ease-in-out;
     }
@@ -152,8 +162,7 @@ body {
       height: 100%;
     }
 
-    .card-about 
-    .card-creator {
+    .card-about .card-creator {
       opacity: 0;
     }
 
@@ -167,44 +176,11 @@ body {
       transform: translate(0, 40px);
     }
   }
-
 }
 
-@media (max-width:698px){
-  .main{margin-bottom:5rem ;
-  min-height: 100dvh;
+@media (max-width: 698px) {
+  .main {
+    margin-bottom: 5rem;
+    min-height: 100dvh;
   }
 }
-
-// CARD IMAGES
-// .card-1 {
-//   .card-img,
-//   .card-img-hovered {
-//     background-image: var(--card-img-hovered-overlay),
-//       url(https://source.unsplash.com/Qm_n6aoYzDs);
-//   }
-// }
-
-// .card-2 {
-//   .card-img,
-//   .card-img-hovered {
-//     background-image: var(--card-img-hovered-overlay),
-//       url(https://source.unsplash.com/C-v1p2DTakA);
-//   }
-// }
-
-// .card-3 {
-//   .card-img,
-//   .card-img-hovered {
-//     background-image: var(--card-img-hovered-overlay),
-//       url(https://source.unsplash.com/V0L1LH7qWOQ);
-//   }
-// }
-
-// .card-4 {
-//   .card-img,
-//   .card-img-hovered {
-//     background-image: var(--card-img-hovered-overlay),
-//       url(https://source.unsplash.com/zAi2Is48-MA);
-//   }
-// }
