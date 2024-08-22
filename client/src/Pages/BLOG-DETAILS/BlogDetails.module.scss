@@ -1,7 +1,6 @@
 @import "../../../scss/abstract/mixins";
 @import "../../../scss/abstract/colors";
 
-
 .main {
   padding: 20px;
   background-color: $background-color;
@@ -12,17 +11,31 @@
   box-sizing: border-box;
 
   .detail-header {
+    max-width: 100%;
     width: 100%;
-    max-width: 800px;
     background-color: white;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 8px 32px 0 rgba(92, 84, 112, 0.37);
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     margin-bottom: 20px;
+    overflow: hidden; // Prevent content overflow
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p {
+      display: block; /* Ensure block-level display */
+      white-space: normal; /* Allow normal text wrapping */
+      overflow-wrap: break-word; /* Break long words if necessary */
+      word-wrap: break-word;
+      word-break: break-word; /* Ensures long text will wrap */
+    }
 
     h2 {
       color: $text-color;
@@ -31,8 +44,9 @@
     }
 
     img {
-      width: 100%;
+      max-width: 100%; // Ensure the image scales down
       height: auto;
+      object-fit: contain;
       border-radius: 10px;
       margin-bottom: 10px;
     }
@@ -42,6 +56,7 @@
       margin: 10px 0;
       font-size: 1rem;
       text-align: left;
+      width: 100%; // Ensure the content fits within the container
     }
 
     .modal {
@@ -59,15 +74,6 @@
       border-radius: 10px;
       box-shadow: 0 8px 32px 0 rgba(92, 84, 112, 0.37);
       margin-top: 20px;
-
-      h4 {
-        color: $text-color;
-        margin-bottom: 10px;
-      }
-
-      div {
-        margin-bottom: 10px;
-      }
     }
 
     .quill {
@@ -94,20 +100,33 @@
   }
 
   .button {
-    // margin: 10px auto;
-    // padding: 10px 20px;
-    // background-color: $primary-color;
-    // color: white;
-    // border: none;
-    // border-radius: 5px;
-    // font-size: 1rem;
-    // cursor: pointer;
-    // transition: background-color 0.3s ease;
-    // width: ;
-
-    // &:hover {
-    //   background-color: $secondary-color;
-    // }
     @include button();
+  }
+}
+
+// Media Queries for Smaller Screens
+@media (max-width: 768px) {
+  .detail-header {
+    padding: 15px;
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    .content {
+      font-size: 0.9rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .detail-header {
+    padding: 10px;
+    h2 {
+      font-size: 1.25rem;
+    }
+
+    .content {
+      font-size: 0.85rem;
+    }
   }
 }

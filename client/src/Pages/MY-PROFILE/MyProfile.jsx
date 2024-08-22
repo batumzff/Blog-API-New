@@ -23,7 +23,7 @@ const MyProfile = () => {
   const userBlogs = blogs?.filter(blog => blog.userId._id == user?.id)
 
   // console.log(userBlogs)
-  // console.log(user);
+  console.log(user);
   const inputRefs = useRef({
     username: user?.username,
     firstName: user?.firstName,
