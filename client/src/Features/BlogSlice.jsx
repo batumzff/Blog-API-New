@@ -7,6 +7,7 @@ const initialState = {
   comments: [],
   blogDetail: {},
   categoryDetail: [],
+  details: {},
   loading: false,
   error: false,
 };
@@ -27,6 +28,7 @@ const BlogSlice = createSlice({
       state.categories = payload[1];
       state.blogs = payload[2];
       // state.comments = payload[3];
+      console.log(payload[2])
     },
 
     getSingleData: (state, { payload }) => {
@@ -40,7 +42,9 @@ const BlogSlice = createSlice({
       // }
 
       else {
-        state[payload.url] = payload.data.data
+        state[payload.url] = payload?.data.data
+        state.details = payload?.data?.details
+        console.log("details",payload?.data?.details)
         console.log("payload",payload)
         console.log("payload.data",payload.data)
         // console.log("payload.data.data",payload.data.data)

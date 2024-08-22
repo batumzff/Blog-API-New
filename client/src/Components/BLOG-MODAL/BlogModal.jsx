@@ -1,9 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-import style from "./BlogModal.module.scss";
+import ReactQuill from "react-quill";
+import { modules } from "../../Helpers/quillModules";
 import { useSelector } from "react-redux";
 import DOMPurify from "dompurify";
 import useBlogData from "../../Custom-hooks/useBlogData";
+import useAxios from "../../Custom-hooks/useAxios";
 import { useNavigate } from "react-router-dom";
+import BlogPost from "../BLOG-POST/BlogPost";
+import style from "./BlogModal.module.scss";
 import QuillEditor from "../QUILL/QuillEditor";
 
 const BlogModal = ({
@@ -14,7 +18,7 @@ const BlogModal = ({
   content,
   categoryId,
   onClose,
-  postBlog,
+  postBlog
 }) => {
   const { categories } = useSelector((state) => state.blog);
   const { user } = useSelector((state) => state.auth);
@@ -25,18 +29,18 @@ const BlogModal = ({
   const [inputs, setInputs] = useState({
     title,
     image,
-    categoryId,
+    categories:categoryId,
     isPublish,
     userId: user?.id,
   });
-  const [text, setText] = useState(content);
-
-  const quillRef = useRef("");
+  // const [text, setText] = useState(content);
+  const quillRef = useRef("")
 
   useEffect(() => {
     getData("categories");
   }, []);
 
+  
   const handleForm = (e) => {
     const { name, value } = e.target;
 
@@ -46,27 +50,22 @@ const BlogModal = ({
     });
   };
 
-  // console.log(inputs);
-  const handleSubmit = (e) => {
+console.log(inputs);
+  const handleSubmit =  (e) => {
     e.preventDefault();
-    // console.log(quillRef.current.value)
-    const sanitizedContent = DOMPurify.sanitize(quillRef.current.value, {
-      USE_PROFILES: { html: true },
-    });
+    const sanitizedContent = DOMPurify.sanitize(quillRef.current.value, { USE_PROFILES: { html: true } });
+    console.log(quillRef.current.value);
     const postData = {
       ...inputs,
       content: sanitizedContent,
-      categories: inputs.categoryId,
+      // categories: categoryId
     };
-    // console.log(postData)
-
-    blogId
-      ? putBlog("blogDetail", blogId, postData)
-      : postBlog("blogs", postData);
+    console.log(postData);
+    blogId ? putBlog("blogDetail",blogId, postData) : postBlog("blogs", postData)
     setInputs({ title: "", image: "", categoryId: "", isPublish: "" });
-    setText("");
-    onClose();
-    blogId ? navigate(`/blog-details/${blogId}`) : navigate("/blogs");
+    // setText("");
+    onClose()
+   blogId ? navigate(`/blog-details/${blogId}`) : navigate("/blogs")
   };
 
   const categoryName = (categories?.filter(
@@ -74,11 +73,11 @@ const BlogModal = ({
   ))[0]?.name;
 
   return (
-    <main className={style["modal-main"]}>
+    <section className={style["modal-main"]}>
       {open && (
-        <div className={style["modal"]}>
+        <main className={style["modal"]}>
           <form onSubmit={handleSubmit}>
-            <div className={style["input-group"]}>
+            <section className={style["input-group"]}>
               <label htmlFor="title">Title</label>
               <input
                 type="text"
@@ -87,13 +86,12 @@ const BlogModal = ({
                 value={inputs.title}
                 onChange={handleForm}
               />
-            </div>
-            <div>
+            </section>
+            <section  className={style.quill}>
               <label htmlFor="content">Content</label>
-
               <QuillEditor value={content} ref={quillRef} />
-            </div>
-            <div className={style["input-group"]}>
+            </section>
+            <section className={style["input-group"]}>
               <label htmlFor="image">Image Url</label>
               <input
                 type="text"
@@ -102,24 +100,25 @@ const BlogModal = ({
                 value={inputs.image}
                 onChange={handleForm}
               />
-            </div>
-            <div className={style["input-group"]}>
-              <label>Categories*</label>
+            </section>
+            <section className={style["input-group"]}>
               <select
-                name="categoryId"
+                name="categories"
                 id="categories"
-                value={inputs.categoryId}
+                value={inputs.categories}
                 onChange={handleForm}
-                required
               >
+                <option value="" >Select Category</option>
+                <option value={categoryId}>{categoryName}</option>
                 {categories?.map((category) => (
-                  <option key={category._id} value={category._id}>
+                  <option value={category._id}>
+                    {/* {category.name == categoryName ? "" : category.name} */}
                     {category.name}
                   </option>
                 ))}
               </select>
-            </div>
-            <div className={style["input-group"]}>
+            </section>
+            <section className={style["input-group"]}>
               <select
                 name="isPublish"
                 id="isPublish"
@@ -130,20 +129,16 @@ const BlogModal = ({
                 <option value="true">Publish</option>
                 <option value="false">Draft</option>
               </select>
-            </div>
-            <section className={style.button}>
-              <button>Submit</button>
-              <button
-                style={{ backgroundColor: "#ED0800" }}
-                onClick={() => onClose(false)}
-              >
-                Close
-              </button>
             </section>
+            <section className={style.button}>
+             <button>Submit</button>
+            <button style={{ backgroundColor:"#ED0800"}} onClick={()=> onClose(false)}>Close</button>  
+            </section>
+           
           </form>
-        </div>
+        </main>
       )}
-    </main>
+    </section>
   );
 };
 

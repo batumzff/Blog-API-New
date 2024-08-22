@@ -8,7 +8,7 @@ import {
 } from "../Features/BlogSlice";
 
 const useBlogData = () => {
-  const { axiosWithToken } = useAxios();
+  const { axiosWithToken, axiosPublic } = useAxios();
   const dispatch = useDispatch();
 
   const getAllBlogData = async () => {
@@ -27,7 +27,7 @@ const useBlogData = () => {
           users?.data?.data,
           categories?.data?.data,
           blogs?.data?.data,
-          comments?.data?.data,
+          // comments?.data?.data,
         ])
       );
     } catch (error) {
@@ -36,10 +36,10 @@ const useBlogData = () => {
     }
   };
 
-  const getData = async (url = "blogs") => {
+  const getData = async (url = "blogs",page = 1) => {
     dispatch(fetchStart());
     try {
-      const { data } = await axiosWithToken(`${url}?limit=20&sort[createdAt]=desc`);
+      const { data } = await axiosPublic(`${url}?limit=8&skip=${(page -1) * 8}&sort[createdAt]=desc&page=${page}`);
       dispatch(getSingleData({ data, url }));
     } catch (error) {
       dispatch(fetchFail());
